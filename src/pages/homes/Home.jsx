@@ -1,10 +1,19 @@
 import React from 'react';
+import { HeroSlider } from './HeroSlider';
+import {WhyChooseUs} from './WhyChooseUs';
+import {FeaturedProperties} from './FeaturedProperties';
+import {Testimonials} from './Testimonials';
+import {NewsletterSignup} from './NewsletterSignup';
 
 const Home = () => {
     return (
-        <div>
-            
-        </div>
+        <div className="w-full">
+      <HeroSlider />
+      <FeaturedProperties />
+      <WhyChooseUs />
+      <Testimonials />
+      <NewsletterSignup />
+    </div>
     );
 };
 
