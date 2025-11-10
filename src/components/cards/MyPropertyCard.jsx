@@ -1,8 +1,7 @@
-
-import React, { useRef } from 'react';
-import { MapPin, Calendar, Heart, HandHelping } from 'lucide-react';
-import { format } from 'date-fns';
-import Modal from '../Modal';
+import React, { useRef } from "react";
+import { MapPin, Calendar, Heart, HandHelping } from "lucide-react";
+import { format } from "date-fns";
+import { Link } from "react-router";
 
 // Sample property data (replace with API later)
 const properties = [
@@ -12,9 +11,10 @@ const properties = [
     price: 750000,
     currency: "$",
     location: "Dhaka, Bangladesh",
-    postedDate: new Date('2025-11-01'),
+    postedDate: new Date("2025-11-01"),
     category: "FOR SALE",
-    image: "https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=800&h=500&fit=crop"
+    image:
+      "https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=800&h=500&fit=crop",
   },
   {
     id: 2,
@@ -22,9 +22,10 @@ const properties = [
     price: 25000000,
     currency: "BDT",
     location: "Gulshan, Dhaka",
-    postedDate: new Date('2025-10-28'),
+    postedDate: new Date("2025-10-28"),
     category: "FOR SALE",
-    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=500&fit=crop"
+    image:
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=500&fit=crop",
   },
   {
     id: 3,
@@ -32,20 +33,21 @@ const properties = [
     price: 3500,
     currency: "$",
     location: "Banani, Dhaka",
-    postedDate: new Date('2025-11-05'),
+    postedDate: new Date("2025-11-05"),
     category: "FOR RENT",
-    image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=500&fit=crop"
-  }
+    image:
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=500&fit=crop",
+  },
 ];
 
 // Property Card Component (Pure JSX)
 const PropertyCard = ({ property }) => {
-  const isForRent = property.category === 'FOR RENT';
-    const bidModalRef = useRef(null)
+  const isForRent = property.category === "FOR RENT";
+  const bidModalRef = useRef(null);
 
-    const handleModal = () => {
-        bidModalRef.current.showModal();
-    }
+  const handleModal = () => {
+    bidModalRef.current.showModal();
+  };
   return (
     <div className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden  group">
       {/* Image Container */}
@@ -55,11 +57,12 @@ const PropertyCard = ({ property }) => {
           alt={property.name}
           className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        
+
         {/* Category Badge */}
-        <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-full text-white text-xs font-semibold flex items-center gap-1.5 shadow-md ${
-          property.category ? 'bg-indigo-500' : 'bg-indigo-600'
-        }`}>
+        <div
+          className={`absolute top-4 right-4 px-3 py-1.5 rounded-full text-white text-xs font-semibold flex items-center gap-1.5 shadow-md ${
+            property.category ? "bg-indigo-500" : "bg-indigo-600"
+          }`}>
           <Heart className="w-3.5 h-3.5" />
           {property.category}
         </div>
@@ -75,10 +78,12 @@ const PropertyCard = ({ property }) => {
         {/* Price */}
         <div className="mb-4">
           <span className="text-3xl font-bold text-indigo-600">
-            {property.currency === 'BDT' ? '৳' : '$'}
+            {property.currency === "BDT" ? "৳" : "$"}
             {property.price.toLocaleString()}
           </span>
-          {isForRent && <span className="text-sm text-gray-600 ml-1">/month</span>}
+          {isForRent && (
+            <span className="text-sm text-gray-600 ml-1">/month</span>
+          )}
         </div>
 
         {/* Location */}
@@ -90,7 +95,7 @@ const PropertyCard = ({ property }) => {
         {/* Posted Date */}
         <div className="flex items-center gap-2 text-gray-600 text-sm mb-5">
           <Calendar className="w-4 h-4 text-gray-500" />
-          <span>Posted on: {format(property.postedDate, 'MMM dd, yyyy')}</span>
+          <span>Posted on: {format(property.postedDate, "MMM dd, yyyy")}</span>
         </div>
 
         {/* Action Buttons */}
@@ -98,19 +103,17 @@ const PropertyCard = ({ property }) => {
           <button className="flex-1 bg-indigo-700 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-indigo-600 transition-colors shadow-sm hover:shadow-md text-sm">
             View Details
           </button>
-          <button onClick={handleModal} className="flex-1 bg-indigo-500 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-indigo-400 transition-colors shadow-sm hover:shadow-md text-sm">
-            Update 
-          </button>
-          <button  className="flex-1 bg-red-900 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-red-800 transition-colors shadow-sm hover:shadow-md text-sm">
+                  <Link
+            to={`/update-property/${property.id}`}
+            onClick={handleModal}
+            className="flex-1 bg-indigo-500 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-indigo-400 transition-colors shadow-sm hover:shadow-md text-sm">
+            Update
+          </Link>
+          <button className="flex-1 bg-red-900 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-red-800 transition-colors shadow-sm hover:shadow-md text-sm">
             Delete
-                  </button>
-                  
-              </div>
-              <dialog ref={bidModalRef} className="modal modal-bottom sm:modal-middle">
-                        <div className="modal-box">
-                            <Modal></Modal>
-                        </div>
-                    </dialog>
+          </button>
+        </div>
+        
       </div>
     </div>
   );

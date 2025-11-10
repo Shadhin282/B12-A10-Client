@@ -36,7 +36,7 @@ export const PropertiesCard = ({property}) => {
             <DollarSign className="w-5 h-5" />
             <span>${property.price}</span>
           </div>
-           <Link to={`/properties/${property.id}`} className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors text-sm">
+           <Link to={`/property-details/${property.id}`} className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors text-sm">
               See Details
               </Link>
               {/* : <Link to="/login" className="px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition-colors text-sm">

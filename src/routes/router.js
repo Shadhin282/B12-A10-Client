@@ -8,6 +8,8 @@ import MyRating from "../pages/MyRating";
 import NotFound from "../pages/NotFound";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import UpdateProperty from "../components/UpdateProperty";
+import PropertyDetails from "../pages/PropertyDetails";
 
 
 const router = createBrowserRouter([
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
                 Component: AllProperties,
             },
             {
+                path: '/property-details/:id',
+                Component: PropertyDetails
+            },
+            {
                 path: '/add-property',
                 Component: AddProperty
             },
@@ -46,6 +52,10 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 Component: SignUp
+            },
+            {
+                path: '/update-property/:id',
+                Component: UpdateProperty
             }
         ]
         
