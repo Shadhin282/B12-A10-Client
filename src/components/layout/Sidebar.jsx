@@ -1,16 +1,19 @@
 import { NavLink } from "react-router";
 import { Home, PlusCircle, Star } from "lucide-react";
+import { use } from "react";
+import AuthContext from "../../Context/AuthContext";
 
-export default function Sidebar() {
+ const  Sidebar =()=> {
+  const {user} = use(AuthContext)
   return (
     <div className="w-64 h-screen bg-white border-r-gray-100 p-4">
       {/* User Info */}
       <div className="flex flex-col items-center mb-8">
         <div className="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-2xl font-bold">
-          JD
+          <img src={user.photoURL} alt="" />
         </div>
-        <h2 className="mt-3 text-lg font-semibold text-gray-800">John Doe</h2>
-        <p className="text-sm text-gray-500">john@example.com</p>
+        <h2 className="mt-3 text-lg font-semibold text-gray-800">{user.displayName}</h2>
+        <p className="text-sm text-gray-500">{user.email}</p>
       </div>
 
       {/* Sidebar Links */}
@@ -51,3 +54,5 @@ export default function Sidebar() {
     </div>
   );
 }
+
+export default Sidebar;

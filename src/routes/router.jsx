@@ -11,12 +11,14 @@ import SignUp from "../pages/SignUp";
 import UpdateProperty from "../components/UpdateProperty";
 import PropertyDetails from "../pages/PropertyDetails";
 import PrivateRoute from "./PrivateRoute";
+import Loader from "../components/Loader";
 
 
 const router = createBrowserRouter([
     {
         path: '/',
         Component: MainLayout,
+        hydrateFallbackElement: <Loader></Loader>,
         children: [
             {
                 index: true,

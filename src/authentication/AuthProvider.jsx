@@ -9,6 +9,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+
 import { auth } from "./firebase/firebase.config";
 import AuthContext from "../Context/AuthContext";
 
@@ -18,6 +19,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
