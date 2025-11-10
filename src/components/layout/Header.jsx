@@ -50,9 +50,9 @@ const Header = () => {
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
-          <button className="px-4 py-2 text-primary border border-primary rounded hover:bg-primary hover:text-white transition-colors">
+          <Link to='/login' className="px-4 py-2 text-primary border border-primary rounded hover:bg-primary hover:text-white transition-colors">
             Login
-          </button>
+          </Link>
           <Link
             to="/signup"
             className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors">

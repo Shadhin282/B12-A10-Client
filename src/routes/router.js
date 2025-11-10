@@ -6,6 +6,8 @@ import AddProperty from "../pages/AddProperty";
 import MyProperties from "../pages/MyProperties";
 import MyRating from "../pages/MyRating";
 import NotFound from "../pages/NotFound";
+import Login from "../pages/Login";
+import SignUp from "../pages/SignUp";
 
 
 const router = createBrowserRouter([
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
             {
                 path: '/my-ratings',
                 Component: MyRating
+            },
+            {
+                path: '/login',
+                Component: Login
+            },
+            {
+                path: '/signup',
+                Component: SignUp
             }
         ]
         
