@@ -1,6 +1,7 @@
 import React from "react";
 import {PropertiesCard} from "../components/cards/PropertiesCard";
 import { FilterIcon, SearchIcon } from "lucide-react";
+import Loader from "../components/Loader";
 
  const properties = [{
   id: '1',
@@ -87,7 +88,7 @@ const AllProperties = () => {
             </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {
-              properties.map(property => <PropertiesCard key={property.id} property={property}></PropertiesCard>)
+            <Loader></Loader> && properties.map(property => <PropertiesCard key={property.id} property={property}></PropertiesCard>)
             }
     </div>
       </div>

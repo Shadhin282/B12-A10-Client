@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { FaXTwitter } from "react-icons/fa6";
 import { Home, Mail, Phone, FileText, Instagram, Facebook, Twitter, Linkedin } from 'lucide-react';
 export const Footer = () => {
   return <footer className="bg-gray-900 text-white">
@@ -75,7 +76,7 @@ export const Footer = () => {
                 <Facebook className="w-5 h-5" />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="bg-gray-700 p-2 rounded-full hover:bg-primary transition-colors">
-                <Twitter className="w-5 h-5" />
+                <FaXTwitter className="w-5 h-5"/>
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-gray-700 p-2 rounded-full hover:bg-primary transition-colors">
                 <Instagram className="w-5 h-5" />
