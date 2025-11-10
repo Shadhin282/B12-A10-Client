@@ -10,6 +10,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import UpdateProperty from "../components/UpdateProperty";
 import PropertyDetails from "../pages/PropertyDetails";
+import PrivateRoute from "./PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -31,19 +32,19 @@ const router = createBrowserRouter([
             },
             {
                 path: '/property-details/:id',
-                Component: PropertyDetails
+                element: <PrivateRoute><PropertyDetails></PropertyDetails></PrivateRoute>
             },
             {
                 path: '/add-property',
-                Component: AddProperty
+                element: <PrivateRoute><AddProperty></AddProperty></PrivateRoute>
             },
             {
                 path: '/my-properties',
-                Component: MyProperties
+                element: <PrivateRoute><MyProperties></MyProperties></PrivateRoute>
             },
             {
                 path: '/my-ratings',
-                Component: MyRating
+                element: <PrivateRoute><MyRating></MyRating></PrivateRoute> 
             },
             {
                 path: '/login',
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/update-property/:id',
-                Component: UpdateProperty
+                element: <PrivateRoute><UpdateProperty></UpdateProperty></PrivateRoute>
             }
         ]
         
