@@ -13,7 +13,7 @@ export const NewsletterSignup = () => {
             market insights, and real estate tips directly in your inbox.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-            <input type="email" placeholder="Enter your email address" className="px-4 py-3 rounded-md flex-grow text-gray-900 focus:outline-none" />
+            <input type="email" placeholder="Enter your email address" className="px-4 py-3 rounded-md flex-1 text-gray-900 bg-white focus:outline-none" />
             <button className="px-6 py-3 bg-white text-primary font-medium rounded-md hover:bg-gray-100 transition-colors">
               Subscribe
             </button>
@@ -23,6 +23,6 @@ export const NewsletterSignup = () => {
             receive updates from HomeNest.
           </p>
         </div>
-      </div>
+      </div> 
     </section>;
 };
