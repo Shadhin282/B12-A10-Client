@@ -119,10 +119,10 @@ export default function AddProperty() {
               >
                 
                   <option className="" value="">Select Category</option>
-                <option value="Apartment">Apartment</option>
-                <option value="House">House</option>
-                <option value="Villa">Villa</option>
-                <option value="Office">Office</option>
+                <option value="Apartment">Rent</option>
+                <option value="House">Sale</option>
+                <option value="Villa">Commercial</option>
+                <option value="Office">Land</option>
                 
               </select>
             </div>

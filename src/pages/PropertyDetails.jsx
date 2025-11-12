@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Bed, Bath, Square, MapPin, Calendar, Star, User, ChevronDown } from 'lucide-react';
+import { Home, Bed, Bath, Square, MapPin, Calendar, Star, User, ChevronDown, CircleUserRound } from 'lucide-react';
 import Loader from '../components/Loader';
 import { useLoaderData } from 'react-router';
 
@@ -73,6 +73,10 @@ const PropertyDetails = () => {
             <div className="flex items-center gap-2 text-gray-400">
               <Calendar className="w-5 h-5" />
               <span className="font-medium">Posted Date:</span> {property.postedDate}
+              </div>
+              <div className="flex items-center gap-2 text-gray-400">
+              <CircleUserRound className="w-5 h-5"/> 
+              <span className="font-medium">Posted By:</span> {property.postedBy}
             </div>
           </div>
 

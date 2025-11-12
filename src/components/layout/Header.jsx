@@ -136,7 +136,9 @@ const Header = () => {
                       All Properties
                   </Link>
         
-                  <Link to="/add-property" className="block py-2 text-gray-700 hover:text-primary">
+          {
+            user && <div>
+               <Link to="/add-property" className="block py-2 text-gray-700 hover:text-primary">
                       Add Properties
                   </Link>
                   <Link to="/my-properties" className="block py-2 text-gray-700 hover:text-primary">
@@ -145,7 +147,10 @@ const Header = () => {
                   <Link to="/my-ratings" className="block py-2 text-gray-700 hover:text-primary">
                       My Ratings
                   </Link>
-                  <div className="flex space-x-4 pt-2 border-t border-gray-200">
+            </div>
+                 }
+          {
+            !user &&  <div className="flex space-x-4 pt-2 border-t border-gray-200">
                       <button  className="px-4 py-2 text-primary border border-primary rounded hover:bg-primary hover:text-white transition-colors">
                           Login
                       </button>
@@ -153,22 +158,25 @@ const Header = () => {
                           Signup
                       </Link>
                   </div>
-                  <div className="pt-2 border-t border-gray-200">
+                 }
+          {
+            user && <div className="pt-2 border-t border-gray-200">
                       <div className="flex items-center space-x-3">
-                          <img src='' alt="User profile" className="w-10 h-10 rounded-full object-cover border-2 border-primary" />
+                          <img src={user.photoURL} alt="User profile" className="w-10 h-10 rounded-full object-cover border-2 border-primary" />
                           <div>
                               <p className="text-sm font-medium text-gray-900">
-                                  shadhin khan
+                                  {user.displayName}
                               </p>
                               <p className="text-xs text-gray-500 truncate">
-                                  shadhinkhan28@gmail.com
+                                  {user.email}
                               </p>
                           </div>
                       </div>
-                      <button className="mt-2 px-4 py-2 text-sm text-red-600 hover:bg-gray-100 rounded w-full text-left">
+                      <button onClick={handleLogout} className="mt-2 px-4 py-2 text-sm text-red-600 hover:bg-gray-100 rounded w-full text-left">
                           Log out
                       </button>
                   </div>
+                  }
               </div>
           </div>}
     </header>
