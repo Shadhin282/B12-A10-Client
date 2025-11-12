@@ -23,26 +23,26 @@ const testimonials = [{
   text: 'I was nervous about selling my first property, but the team at HomeNest guided me through every step. Their marketing strategy helped me get multiple offers above my asking price!'
 }];
 export const Testimonials = () => {
-  return <section className="py-16 bg-gray-50">
+  return <section className="py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold  mb-4">
             What Our Clients Say
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-400 max-w-2xl mx-auto">
             Don't just take our word for it. Hear from our satisfied clients who
             have found their perfect properties through HomeNest.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map(testimonial => <div key={testimonial.id} className="bg-white p-6 rounded-lg shadow-md">
+          {testimonials.map(testimonial => <div key={testimonial.id} className="bg-gray-50 dark:bg-black/90 p-6 rounded-lg shadow-md">
               <div className="flex items-center mb-4">
                 <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover mr-4" />
                 <div>
-                  <h3 className="font-bold text-gray-900">
+                  <h3 className="font-bold ">
                     {testimonial.name}
                   </h3>
-                  <p className="text-sm text-gray-600">{testimonial.role}</p>
+                  <p className="text-sm text-gray-400">{testimonial.role}</p>
                 </div>
               </div>
               <div className="flex mb-3">
@@ -52,7 +52,7 @@ export const Testimonials = () => {
             </div>)}
         </div>
         <div className="text-center mt-12">
-          <button className="px-6 py-3 bg-white text-primary border-2 border-primary rounded-md hover:bg-primary hover:text-white transition-colors font-medium">
+          <button className="px-6 py-3  text-primary border-2 border-primary rounded-md hover:bg-primary hover:text-white transition-colors font-medium">
             Read More Testimonials
           </button>
         </div>

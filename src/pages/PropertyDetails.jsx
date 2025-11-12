@@ -55,44 +55,16 @@ const PropertyDetails = () => {
 
   return (
     <>
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-8">
-              <div className="flex items-center gap-2">
-                <Home className="w-6 h-6 text-blue-600" />
-                <span className="font-bold text-xl text-gray-900">RealtyCo</span>
-              </div>
-              <nav className="hidden md:flex items-center gap-6">
-                <a href="#" className="text-gray-600 hover:text-gray-900 font-medium">For Sale</a>
-                <a href="#" className="text-gray-600 hover:text-gray-900 font-medium">For Rent</a>
-                <a href="#" className="text-gray-600 hover:text-gray-900 font-medium">Agents</a>
-                <a href="#" className="text-gray-600 hover:text-gray-900 font-medium">Blog</a>
-              </nav>
-            </div>
-            <div className="flex items-center gap-3">
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition">
-                List a Property
-              </button>
-              <div className="w-8 h-8 bg-gray-300 rounded-full"></div>
-            </div>
-          </div>
-        </div>
-      </header>
+      
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
-        <nav className="text-sm text-gray-600 mb-4">
-          <a href="#" className="hover:text-blue-600">Home</a> / 
-          <a href="#" className="hover:text-blue-600"> For Sale</a> / 
-          <span className="text-gray-900"> {property.name}</span>
-        </nav>
+        
 
         {/* Property Header */}
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">{property.name}</h1>
-          <p className="text-gray-600 flex items-center gap-1">
+          <h1 className="text-3xl font-bold  mb-2">{property.name}</h1>
+          <p className="text-gray-400 flex items-center gap-1">
             <MapPin className="w-4 h-4" />
             {property.address}
           </p>
@@ -131,9 +103,7 @@ const PropertyDetails = () => {
                 className="w-full h-44 object-cover rounded-xl shadow-md"
               />
             ))}
-            <button className="w-full bg-white border border-gray-300 text-gray-700 py-3 rounded-xl font-medium hover:bg-gray-50 transition flex items-center justify-center gap-2">
-              View All Photos
-            </button>
+           
           </div>
         </div>
 
@@ -141,20 +111,20 @@ const PropertyDetails = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
           {/* Description */}
           <div className="lg:col-span-2">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Property Description</h2>
-            <p className="text-gray-600 leading-relaxed mb-6">{property.description}</p>
+            <h2 className="text-2xl font-bold mb-4">Property Description</h2>
+            <p className="text-gray-400 leading-relaxed mb-6">{property.description}</p>
             
-            <div className="flex items-center gap-2 text-gray-600">
+            <div className="flex items-center gap-2 text-gray-400">
               <Calendar className="w-5 h-5" />
               <span className="font-medium">Posted Date:</span> {property.postedDate}
             </div>
           </div>
 
           {/* Price & Agent Card */}
-          <div className="bg-gray-50 p-6 rounded-xl">
+          <div className="bg-gray-50 dark:bg-black/90 p-6 rounded-xl">
             <div className="mb-4">
               <p className="text-sm text-gray-600 mb-1">Price</p>
-              <p className="text-4xl font-bold text-yellow-600">
+              <p className="text-4xl font-bold text-indigo-600">
                 {property.currency === 'BDT' ? '৳' : '$'}
                 {property.price.toLocaleString()}
               </p>
@@ -184,7 +154,7 @@ const PropertyDetails = () => {
         {/* Ratings & Reviews Section */}
         <div className="border-t border-gray-200 pt-12">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">Ratings & Reviews</h2>
+            <h2 className="text-2xl font-bold ">Ratings & Reviews</h2>
             <div className="flex items-center gap-3">
               <select className="border border-gray-300 rounded-lg px-4 py-2 text-sm">
                 <option>Sort by: Newest</option>
@@ -198,10 +168,10 @@ const PropertyDetails = () => {
           </div>
 
           {/* Overall Rating */}
-          <div className="bg-white p-6 rounded-xl shadow-sm mb-8">
+          <div className="bg-gray-50 dark:bg-black/90 p-6 rounded-xl shadow-sm mb-8">
             <div className="flex items-start gap-8">
               <div className="text-center">
-                <p className="text-5xl font-bold text-gray-900">{property.rating}</p>
+                <p className="text-5xl font-bold ">{property.rating}</p>
                 <div className="flex justify-center gap-1 my-2">
                   {[...Array(5)].map((_, i) => (
                     <Star 
@@ -210,20 +180,20 @@ const PropertyDetails = () => {
                     />
                   ))}
                 </div>
-                <p className="text-sm text-gray-600">Based on {property.totalReviews} reviews</p>
+                <p className="text-sm text-gray-400">Based on {property.totalReviews} reviews</p>
               </div>
 
               <div className="flex-1 space-y-2">
                 {property.ratingBreakdown.map((item) => (
                   <div key={item.stars} className="flex items-center gap-3">
-                    <span className="text-sm text-gray-600 w-12">{item.stars} star</span>
-                    <div className="flex-1 bg-gray-200 rounded-full h-3 overflow-hidden">
+                    <span className="text-sm text-gray-400 w-12">{item.stars} star</span>
+                    <div className="flex-1 bg-gray-200 dark:bg-gray-900 rounded-full h-3 overflow-hidden">
                       <div 
                         className="bg-yellow-400 h-full transition-all"
                         style={{ width: `${(item.count / property.totalReviews) * 100}%` }}
                       />
                     </div>
-                    <span className="text-sm text-gray-600 w-12 text-right">{item.count}</span>
+                    <span className="text-sm text-gray-400 w-12 text-right">{item.count}</span>
                   </div>
                 ))}
               </div>
@@ -233,13 +203,13 @@ const PropertyDetails = () => {
           {/* Individual Reviews */}
           <div className="space-y-6">
             {property.reviews.map((review) => (
-              <div key={review.id} className="bg-white p-6 rounded-xl shadow-sm">
+              <div key={review.id} className="bg-gray-50 dark:bg-black/90 p-6 rounded-xl shadow-sm">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-gray-300 rounded-full flex-shrink-0"></div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
                       <div>
-                        <p className="font-semibold text-gray-900">{review.name}</p>
+                        <p className="font-semibold ">{review.name}</p>
                         <div className="flex gap-1">
                           {[...Array(5)].map((_, i) => (
                             <Star 
@@ -249,9 +219,9 @@ const PropertyDetails = () => {
                           ))}
                         </div>
                       </div>
-                      <p className="text-sm text-gray-500">{review.date}</p>
+                      <p className="text-sm text-gray-400">{review.date}</p>
                     </div>
-                    <p className="text-gray-600">{review.text}</p>
+                    <p className="text-gray-400">{review.text}</p>
                   </div>
                 </div>
               </div>

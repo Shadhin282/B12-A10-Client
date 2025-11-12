@@ -1,14 +1,14 @@
 import React from 'react';
 import { Mail } from 'lucide-react';
 export const NewsletterSignup = () => {
-  return <section className="py-16 bg-primary">
+  return <section className="py-16 bg-black/90 ">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center text-white">
           <Mail className="w-12 h-12 mx-auto mb-4" />
           <h2 className="text-3xl font-bold mb-4">
             Stay Updated with HomeNest
           </h2>
-          <p className="mb-8 text-white/90">
+          <p className="mb-8 text-white/30">
             Subscribe to our newsletter to receive the latest property listings,
             market insights, and real estate tips directly in your inbox.
           </p>
@@ -18,7 +18,7 @@ export const NewsletterSignup = () => {
               Subscribe
             </button>
           </div>
-          <p className="mt-4 text-sm text-white/80">
+          <p className="mt-4 text-sm text-white/30">
             By subscribing, you agree to our Privacy Policy and consent to
             receive updates from HomeNest.
           </p>

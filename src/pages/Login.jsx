@@ -1,10 +1,11 @@
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import AuthContext from "../Context/AuthContext";
 import { use } from "react";
+import Loader from "../components/Loader";
 
 export default function Login() {
-const { logIn, googleSign, setUser} = use(AuthContext);
+const { logIn, googleSign, setUser,loading} = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -15,12 +16,12 @@ const { logIn, googleSign, setUser} = use(AuthContext);
 
     logIn(email, password)
       .then((res) => {
-        // if (loading) {
-        //   return <Loading></Loading>;
-        // }
+        if (loading) {
+          return <Loader></Loader>;
+        }
         setUser(res.user)
         toast.success("Successfully Sign in");
-        navigate(`${location.state ? location.state : ""}`);
+        navigate(`${location.state ? location.state : "/home"}`);
       })
       .catch(() => {
         toast.error("Auth/Invalid-credential");
@@ -30,9 +31,10 @@ const { logIn, googleSign, setUser} = use(AuthContext);
   const handleGoogle = () => {
     googleSign()
       .then((res) => {
+        console.log(res.user)
         setUser(res.user);
         toast.success("Google sign In Successfully");
-        navigate(`${location.state ? location.state : ""}`);
+        navigate(`${location.state ? location.state : "/home"}`);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -40,8 +42,8 @@ const { logIn, googleSign, setUser} = use(AuthContext);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-md text-center">
+    <div className="min-h-screen flex items-center justify-center ">
+      <div className=" dark:bg-black/90 shadow-2xl rounded-2xl p-10 w-full max-w-md text-center">
         <h2 className="text-2xl font-bold text-indigo-700 mb-6">Welcome back</h2>
 
         <form onSubmit={handleLogin} className="space-y-4">
@@ -49,14 +51,14 @@ const { logIn, googleSign, setUser} = use(AuthContext);
             type="email"
             name='email'
             placeholder="Email"
-            className="w-full border border-gray-300 rounded-full px-4 py-3 text-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+            className="w-full border border-gray-300 rounded-full px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
           />
 
           <input
             type="password"
             name="password"
             placeholder="Password"
-            className="w-full border border-gray-300 rounded-full px-4 py-3 text-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
+            className="w-full border border-gray-300 rounded-full px-4 py-3  focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
           />
 
           <button

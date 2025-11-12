@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { HeroSlider } from './HeroSlider';
 import {WhyChooseUs} from './WhyChooseUs';
 import {FeaturedProperties} from './FeaturedProperties';
@@ -7,11 +7,24 @@ import {NewsletterSignup} from './NewsletterSignup';
 import Loader from '../../components/Loader';
 
 const Home = () => {
+  const [loading, setLoading] = useState(true)
+   const [featuredProperties,setFeaturedProperties] = useState([])
+  console.log(featuredProperties)
+  useEffect(() => {
+    setLoading(true)
+    fetch('http://localhost:5000/recent-properties')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        setFeaturedProperties(data)
+        setLoading(false)
+    })
+  },[])
     return (
-        <div className="w-full">
+        <div className="w-full ">
       <HeroSlider />
         {
-          <Loader></Loader> && <FeaturedProperties />
+         loading? <Loader></Loader> : <FeaturedProperties featuredProperties={featuredProperties} />
       }
       <WhyChooseUs />
       <Testimonials />

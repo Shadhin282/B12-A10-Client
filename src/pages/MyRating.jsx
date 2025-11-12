@@ -83,19 +83,19 @@ const StarRating = ({ rating }) => {
 // Review card component (no TS)
 const ReviewCard = ({ review }) => {
   return (
-    <article className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
+    <article className="bg-gray-50 dark:bg-black/90 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group">
       <div className="relative overflow-hidden">
         <img
           src={review.propertyImage}
           alt={review.propertyName}
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform,transform duration-300"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0  opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
       <div className="p-5">
         <div className="mb-3">
-          <h3 className="font-semibold text-gray-900 text-lg">{review.reviewerName}</h3>
+          <h3 className="font-semibold  text-lg">{review.reviewerName}</h3>
           <p className="text-blue-600 font-medium text-sm mt-1">{review.propertyName}</p>
         </div>
 
@@ -103,7 +103,7 @@ const ReviewCard = ({ review }) => {
           <StarRating rating={review.rating} />
         </div>
 
-        <p className="text-gray-600 text-sm line-clamp-3 mb-3">
+        <p className="text-gray-400 text-sm line-clamp-3 mb-3">
           {review.reviewText}
         </p>
 
@@ -119,10 +119,10 @@ const ReviewCard = ({ review }) => {
 export default function MyRating() {
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen ">
         <div className="container mx-auto px-4 py-8 max-w-7xl">
           <header className="text-center mb-10">
-            <h1 className="text-4xl font-bold text-gray-900 mb-3">
+            <h1 className="text-4xl font-bold  mb-3">
               User Ratings & Feedback
             </h1>
             <p className="text-gray-600 text-lg">
@@ -136,11 +136,11 @@ export default function MyRating() {
             ))}
           </div>
 
-          <div className="mt-12 text-center">
-            <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200 shadow-md hover:shadow-lg">
+          {/* <div className="mt-12 text-center">
+            <button className="border border-gray-100  px-8 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors duration-200 shadow-md hover:shadow-lg">
               Load More Reviews
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

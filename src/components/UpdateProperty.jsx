@@ -20,14 +20,14 @@ export default function UpdateProperty() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 py-8 px-4">
+    <div className="min-h-screen   py-8 px-4">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-3xl font-bold ">
             Update Property Details
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-400 mt-2">
             <span className="font-medium">
               Current time: November 10, 2025 06:15 PM +06
             </span>{" "}
@@ -36,7 +36,7 @@ export default function UpdateProperty() {
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-gray-50 dark:bg-black/90 rounded-2xl shadow-xl overflow-hidden">
           {/* Property Image */}
           <div className="relative">
             <img
@@ -52,13 +52,13 @@ export default function UpdateProperty() {
               <div className="lg:col-span-2 space-y-6">
                 {/* Property Name */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-400 mb-1">
                     Property Name
                   </label>
                   <input
                     type="text"
                     name="name"
-                    value={formData.name}
+                    
                     onChange={handleChange}
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
@@ -66,12 +66,12 @@ export default function UpdateProperty() {
 
                 {/* Description */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-400 mb-1">
                     Description
                   </label>
                   <textarea
                     name="description"
-                    value={formData.description}
+                    
                     onChange={handleChange}
                     rows={4}
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
@@ -81,12 +81,12 @@ export default function UpdateProperty() {
                 {/* Category & Price */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-400 mb-1">
                       Category
                     </label>
                     <select
                       name="category"
-                      value={formData.category}
+                     
                       onChange={handleChange}
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                       <option>Apartment</option>
@@ -96,7 +96,7 @@ export default function UpdateProperty() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-400 mb-1">
                       Price
                     </label>
                     <div className="relative">
@@ -106,7 +106,7 @@ export default function UpdateProperty() {
                       <input
                         type="text"
                         name="price"
-                        value={formData.price}
+                       
                         onChange={handleChange}
                         className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
@@ -116,7 +116,7 @@ export default function UpdateProperty() {
 
                 {/* Location */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-400 mb-1">
                     Location
                   </label>
                   <div className="relative">
@@ -124,7 +124,7 @@ export default function UpdateProperty() {
                     <input
                       type="text"
                       name="location"
-                      value={formData.location}
+                      
                       onChange={handleChange}
                       className="w-full pl-11 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
@@ -133,13 +133,13 @@ export default function UpdateProperty() {
 
                 {/* Image Link */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-400 mb-1">
                     Image Link
                   </label>
                   <input
                     type="url"
                     name="imageLink"
-                    value={formData.imageLink}
+                    
                     onChange={handleChange}
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono"
                   />
@@ -147,13 +147,13 @@ export default function UpdateProperty() {
               </div>
 
               {/* Right: Read-only Owner Info */}
-              <div className="bg-blue-50 p-6 rounded-xl space-y-4">
-                <h3 className="font-semibold text-gray-800 text-lg">
+              <div className="bg-gray-50 dark:bg-black/80 p-6 rounded-xl space-y-4">
+                <h3 className="font-semibold  text-lg">
                   Owner Information
                 </h3>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-1">
+                  <label className="block text-sm font-medium text-gray-400 mb-1">
                     User Name
                   </label>
                   <input
@@ -165,7 +165,7 @@ export default function UpdateProperty() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-1">
+                  <label className="block text-sm font-medium text-gray-400 mb-1">
                     User Email
                   </label>
                   <input
@@ -180,9 +180,7 @@ export default function UpdateProperty() {
 
             {/* Action Buttons */}
             <div className="flex justify-end gap-3 mt-8 pt-6 border-t border-gray-200">
-              <button className="px-6 py-2.5 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 font-medium">
-                Cancel
-              </button>
+              
               <button className="px-7 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium shadow-sm hover:shadow">
                 Save Changes
               </button>

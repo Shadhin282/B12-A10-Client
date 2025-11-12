@@ -3,6 +3,7 @@ import React, { use, useState } from "react";
 import { Link } from "react-router";
 import AuthContext from "../../Context/AuthContext";
 import { toast } from "react-toastify";
+import DarkLight from "../DarkLight";
 
 const Header = () => {
   const { user, logout } = use(AuthContext)
@@ -30,21 +31,24 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+    <header className='shadow-md bg-background sticky top-0 z-50'>
+      <div className="container font-semibold mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/home" className="flex items-center space-x-2">
           <Home className="w-8 h-8 text-primary" />
           <span className="text-xl font-bold text-primary">HomeNest</span>
+        
         </Link>
-        <nav className="hidden md:flex items-center space-x-8">
+        
+        <nav className="hidden  text-primary md:flex items-center space-x-5">
+          <div className=""><DarkLight></DarkLight></div>
           <Link
             to="/"
-            className="text-gray-700 hover:text-primary transition-colors">
+            className=" hover:text-primary transition-colors">
             Home
           </Link>
           <Link
             to="/properties"
-            className="text-gray-700 hover:text-primary transition-colors">
+            className=" hover:text-primary transition-colors">
             All Properties
           </Link>
 
@@ -52,23 +56,27 @@ const Header = () => {
             user && (<div className="hidden md:flex items-center space-x-8">
               <Link
             to="/add-property"
-            className="text-gray-700 hover:text-primary transition-colors">
+            className=" hover:text-primary transition-colors">
             Add Properties
           </Link>
           <Link
             to="/my-properties"
-            className="text-gray-700 hover:text-primary transition-colors">
+            className=" hover:text-primary transition-colors">
             My Properties
           </Link>
           <Link
             to="/my-ratings"
-            className="text-gray-700 hover:text-primary transition-colors">
+            className=" hover:text-primary transition-colors">
             My Ratings
           </Link>
             </div>)
           }
-        </nav>
 
+          <div></div>
+            
+          
+        </nav>
+          
         <div className="hidden md:flex items-center space-x-4">
           {
             !user && <div className="hidden md:flex items-center space-x-4">

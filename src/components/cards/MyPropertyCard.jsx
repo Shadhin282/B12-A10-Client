@@ -41,7 +41,7 @@ const properties = [
 ];
 
 // Property Card Component (Pure JSX)
-const PropertyCard = ({ property }) => {
+const MyPropertyCard = ({ property }) => {
   const isForRent = property.category === "FOR RENT";
   const bidModalRef = useRef(null);
 
@@ -49,7 +49,7 @@ const PropertyCard = ({ property }) => {
     bidModalRef.current.showModal();
   };
   return (
-    <div className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden  group">
+    <div className="bg-gray-50 dark:bg-black/90 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden  group">
       {/* Image Container */}
       <div className="relative overflow-hidden">
         <img
@@ -71,7 +71,7 @@ const PropertyCard = ({ property }) => {
       {/* Card Content */}
       <div className="p-5">
         {/* Property Name */}
-        <h3 className="font-bold text-xl text-gray-900 mb-2 line-clamp-1">
+        <h3 className="font-bold text-xl  mb-2 line-clamp-1">
           {property.name}
         </h3>
 
@@ -82,19 +82,19 @@ const PropertyCard = ({ property }) => {
             {property.price.toLocaleString()}
           </span>
           {isForRent && (
-            <span className="text-sm text-gray-600 ml-1">/month</span>
+            <span className="text-sm text-gray-400 ml-1">/month</span>
           )}
         </div>
 
         {/* Location */}
-        <div className="flex items-center gap-2 text-gray-600 text-sm mb-2">
-          <MapPin className="w-4 h-4 text-gray-500" />
+        <div className="flex items-center gap-2 text-gray-400 text-sm mb-2">
+          <MapPin className="w-4 h-4 text-gray-400" />
           <span>{property.location}</span>
         </div>
 
         {/* Posted Date */}
-        <div className="flex items-center gap-2 text-gray-600 text-sm mb-5">
-          <Calendar className="w-4 h-4 text-gray-500" />
+        <div className="flex items-center gap-2 text-gray-400 text-sm mb-5">
+          <Calendar className="w-4 h-4 text-gray-400" />
           <span>Posted on: {format(property.postedDate, "MMM dd, yyyy")}</span>
         </div>
 
@@ -122,15 +122,15 @@ const PropertyCard = ({ property }) => {
 // Main Page
 export default function PropertyListingPage() {
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-10 px-4">
+    <div className="min-h-screen  py-10 px-4">
       {
         properties ?
         < div className="container mx-auto max-w-7xl">
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold text-gray-900 mb-3">
+        <h1 className="text-4xl font-bold mb-3">
           Your Property Listings
         </h1>
-        <p className="text-lg text-gray-600">
+        <p className="text-lg text-gray-400">
           Manage your real estate in Bangladesh
         </p>
       </div>
@@ -138,39 +138,37 @@ export default function PropertyListingPage() {
       {/* Responsive Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2  gap-6">
         {properties.map((property) => (
-          <PropertyCard key={property.id} property={property} />
+          <MyPropertyCard key={property.id} property={property} />
         ))}
       </div>
 
       {/* Load More (Optional) */}
-      <div className="text-center mt-12">
-        <button className="bg-purple-600 text-white px-8 py-3 rounded-full font-medium hover:bg-purple-700 transition-all shadow-lg hover:shadow-xl">
+      {/* <div className="text-center mt-12">
+        <button className="border bg-white border-indigo-500 text-indigo-600 hover:text-white px-8 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-all shadow-lg hover:shadow-xl">
           Load More Properties
         </button>
-      </div>
+      </div> */}
           </div>
           :
           <div>
             <div className="flex justify-between items-center mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800">My Properties</h1>
+            <h1 className="text-2xl font-bold ">My Properties</h1>
             <p className="text-gray-500 text-sm">
               Manage your property listings
             </p>
           </div>
-          <button className="bg-indigo-700 text-white px-5 py-2 rounded-md hover:bg-indigo-600">
+          <Link to='/add-property' className="bg-indigo-700 text-white px-5 py-2 rounded-md hover:bg-indigo-600">
             Add New Property
-          </button>
+          </Link>
         </div>
 
         {/* Empty State */}
-        <div className="flex flex-col items-center justify-center h-64 bg-white border-gray-100 rounded-lg shadow-sm">
-          <p className="text-gray-500 mb-4">
+        <div className="flex flex-col items-center justify-center h-64 border-gray-100 rounded-lg shadow-lg">
+          <p className="text-gray-500 text-xl mb-4">
             You haven&apos;t added any properties yet.
           </p>
-          <button className="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md hover:bg-indigo-200">
-            Add Your First Property
-          </button>
+          
         </div>
           </div>
     }
