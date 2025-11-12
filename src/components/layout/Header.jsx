@@ -42,7 +42,7 @@ const Header = () => {
         <nav className="hidden  text-primary md:flex items-center space-x-5">
           <div className=""><DarkLight></DarkLight></div>
           <Link
-            to="/"
+            to="/home"
             className=" hover:text-primary transition-colors">
             Home
           </Link>
