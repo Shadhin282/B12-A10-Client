@@ -1,22 +1,47 @@
 
-import React, { useState } from "react";
+import React, { use } from "react";
 import { MapPin } from "lucide-react";
+import { useLoaderData, useNavigate } from "react-router";
+import AuthContext from "../Context/AuthContext";
+import { toast } from "react-toastify";
 
 export default function UpdateProperty() {
-  const [formData, setFormData] = useState({
-    name: "Modern Downtown Loft",
-    description:
-      "A beautifully designed loft in the heart of the city. Comes with stunning views, modern amenities, and close proximity to all major attractions. Perfect for professionals and couples.",
-    category: "Apartment",
-    price: "2,500.00",
-    location: "123 Market St, San Francisco, CA 94103",
-    imageLink:
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&h=400&fit=crop",
-  });
+  const { user } = use(AuthContext)
+  const navigate = useNavigate()
+  const formData = useLoaderData()
+  const now = new Date();
+  const currentDate = now.toLocaleString();
+  console.log(formData._id)
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    const formDataInput = {
+      propertyName: e.target.name.value,
+      description : e.target.description.value ,
+       category : e.target.category.value ,
+       location : e.target.location.value ,
+      propertyPrice : e.target.price.value ,
+        imageLinkInput : e.target.imageLink.value ,
+      
+    };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    try {
+      const res = await fetch(`http://localhost:5000/properties/${formData._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          
+        },
+        body: JSON.stringify(formDataInput),
+      });
+
+      const data = await res.json();
+      console.log(data);
+      toast.success("Property updated successfully!");
+      navigate(`/property-details/${formData._id}`)
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -29,7 +54,7 @@ export default function UpdateProperty() {
           </h1>
           <p className="text-gray-400 mt-2">
             <span className="font-medium">
-              Current time: November 10, 2025 06:15 PM +06
+              Current time: { currentDate }
             </span>{" "}
             |<span className="font-medium ml-1">Country: BD</span>
           </p>
@@ -40,13 +65,13 @@ export default function UpdateProperty() {
           {/* Property Image */}
           <div className="relative">
             <img
-              src={formData.imageLink}
+              src={formData.imageLinkInput}
               alt="Property"
               className="w-full h-80 object-cover"
             />
           </div>
 
-          <div className="p-6 md:p-8">
+          <form onSubmit={handleUpdate} className="p-6 md:p-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Left: Editable Fields */}
               <div className="lg:col-span-2 space-y-6">
@@ -59,7 +84,7 @@ export default function UpdateProperty() {
                     type="text"
                     name="name"
                     
-                    onChange={handleChange}
+                    
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -72,7 +97,7 @@ export default function UpdateProperty() {
                   <textarea
                     name="description"
                     
-                    onChange={handleChange}
+                  
                     rows={4}
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                   />
@@ -87,7 +112,7 @@ export default function UpdateProperty() {
                     <select
                       name="category"
                      
-                      onChange={handleChange}
+                     
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                       <option>Apartment</option>
                       <option>House</option>
@@ -107,7 +132,7 @@ export default function UpdateProperty() {
                         type="text"
                         name="price"
                        
-                        onChange={handleChange}
+                      
                         className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                     </div>
@@ -125,7 +150,7 @@ export default function UpdateProperty() {
                       type="text"
                       name="location"
                       
-                      onChange={handleChange}
+                      
                       className="w-full pl-11 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -140,7 +165,7 @@ export default function UpdateProperty() {
                     type="url"
                     name="imageLink"
                     
-                    onChange={handleChange}
+                    
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono"
                   />
                 </div>
@@ -158,7 +183,7 @@ export default function UpdateProperty() {
                   </label>
                   <input
                     type="text"
-                    value="Jane Doe"
+                    defaultValue={user.displayName}
                     readOnly
                     className="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-gray-700 cursor-not-allowed"
                   />
@@ -170,7 +195,7 @@ export default function UpdateProperty() {
                   </label>
                   <input
                     type="email"
-                    value="jane.doe@example.com"
+                    defaultValue={user.email}
                     readOnly
                     className="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-gray-700 cursor-not-allowed"
                   />
@@ -185,7 +210,7 @@ export default function UpdateProperty() {
                 Save Changes
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

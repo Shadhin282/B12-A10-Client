@@ -1,60 +1,58 @@
-import React, { useRef } from "react";
+import React, { use, useEffect, useState } from "react";
 import { MapPin, Calendar, Heart, HandHelping } from "lucide-react";
 import { format } from "date-fns";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import AuthContext from "../../Context/AuthContext";
 
 // Sample property data (replace with API later)
-const properties = [
-  {
-    id: 1,
-    name: "Modern City Apartment",
-    price: 750000,
-    currency: "$",
-    location: "Dhaka, Bangladesh",
-    postedDate: new Date("2025-11-01"),
-    category: "FOR SALE",
-    image:
-      "https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=800&h=500&fit=crop",
-  },
-  {
-    id: 2,
-    name: "Luxury Villa in Gulshan",
-    price: 25000000,
-    currency: "BDT",
-    location: "Gulshan, Dhaka",
-    postedDate: new Date("2025-10-28"),
-    category: "FOR SALE",
-    image:
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=500&fit=crop",
-  },
-  {
-    id: 3,
-    name: "Cozy Studio Flat",
-    price: 3500,
-    currency: "$",
-    location: "Banani, Dhaka",
-    postedDate: new Date("2025-11-05"),
-    category: "FOR RENT",
-    image:
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=500&fit=crop",
-  },
-];
+
 
 // Property Card Component (Pure JSX)
 const MyPropertyCard = ({ property }) => {
   const isForRent = property.category === "FOR RENT";
-  const bidModalRef = useRef(null);
+  const navigate = useNavigate()
 
-  const handleModal = () => {
-    bidModalRef.current.showModal();
+  console.log(property._id)
+
+    const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/properties/${property._id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            })
+            navigate('/all-models')
+          })
+          .catch((err) => {
+            toast.success(err.message);
+          });
+      }
+    });
   };
   return (
     <div className="bg-gray-50 dark:bg-black/90 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden  group">
       {/* Image Container */}
       <div className="relative overflow-hidden">
         <img
-          src={property.image}
-          alt={property.name}
+          src={property.imageLinkInput}
+          alt={property.propertyName}
           className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
         />
 
@@ -72,14 +70,14 @@ const MyPropertyCard = ({ property }) => {
       <div className="p-5">
         {/* Property Name */}
         <h3 className="font-bold text-xl  mb-2 line-clamp-1">
-          {property.name}
+          {property.propertyName}
         </h3>
 
         {/* Price */}
         <div className="mb-4">
           <span className="text-3xl font-bold text-indigo-600">
-            {property.currency === "BDT" ? "৳" : "$"}
-            {property.price.toLocaleString()}
+            
+            {property.price}
           </span>
           {isForRent && (
             <span className="text-sm text-gray-400 ml-1">/month</span>
@@ -100,16 +98,16 @@ const MyPropertyCard = ({ property }) => {
 
         {/* Action Buttons */}
         <div className="flex gap-2">
-          <button className="flex-1 bg-indigo-700 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-indigo-600 transition-colors shadow-sm hover:shadow-md text-sm">
+          <Link className="flex-1 bg-indigo-700 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-indigo-600 transition-colors shadow-sm hover:shadow-md text-sm">
             View Details
-          </button>
+          </Link>
                   <Link
-            to={`/update-property/${property.id}`}
-            onClick={handleModal}
+            to={`/update-property/${property._id}`}
+            
             className="flex-1 bg-indigo-500 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-indigo-400 transition-colors shadow-sm hover:shadow-md text-sm">
             Update
           </Link>
-          <button className="flex-1 bg-red-900 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-red-800 transition-colors shadow-sm hover:shadow-md text-sm">
+          <button onClick={handleDelete} className="flex-1 bg-red-900 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-red-800 transition-colors shadow-sm hover:shadow-md text-sm">
             Delete
           </button>
         </div>
@@ -121,11 +119,23 @@ const MyPropertyCard = ({ property }) => {
 
 // Main Page
 export default function PropertyListingPage() {
+  const { user } = use(AuthContext)
+
+  const [properties, setProperties] = useState([])
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/myProperties?email=${user.email}`)
+      .then(res => res.json())
+      .then(data => {
+        
+        setProperties(data)
+    })
+  },[user.email])
   return (
     <div className="min-h-screen  py-10 px-4">
       {
-        properties ?
-        < div className="container mx-auto max-w-7xl">
+       properties.length ?
+      < div className="container mx-auto max-w-7xl">
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold mb-3">
           Your Property Listings
@@ -142,13 +152,8 @@ export default function PropertyListingPage() {
         ))}
       </div>
 
-      {/* Load More (Optional) */}
-      {/* <div className="text-center mt-12">
-        <button className="border bg-white border-indigo-500 text-indigo-600 hover:text-white px-8 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-all shadow-lg hover:shadow-xl">
-          Load More Properties
-        </button>
-      </div> */}
-          </div>
+  
+    </div>
           :
           <div>
             <div className="flex justify-between items-center mb-6">

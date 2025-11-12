@@ -1,72 +1,28 @@
-
 import React from 'react';
 import { Home, Bed, Bath, Square, MapPin, Calendar, Star, User, ChevronDown } from 'lucide-react';
+import Loader from '../components/Loader';
+import { useLoaderData } from 'react-router';
 
 const PropertyDetails = () => {
-  // Sample property data (BD-ready)
-  const property = {
-    name: "Modern Villa with Ocean View",
-    address: "123 Ocean Drive, Malibu, CA 90265",
-    category: "For Sale",
-    type: "Apartment",
-    beds: 5,
-    baths: 4,
-    sqft: 3450,
-    price: 4500000,
-    currency: "$",
-    description: "Discover unparalleled luxury in this stunning modern villa perched above the Pacific. With breathtaking ocean views from every room, this residence offers an open-concept living space, gourmet kitchen with high-end appliances, and an expansive outdoor deck with an infinity pool. Perfect for both relaxing and entertaining, this property is the epitome of coastal California living.",
-    postedDate: "October 26, 2023",
-    agent: {
-      name: "Jane Doe",
-      title: "Real Estate Agent",
-      photo: "https://randomuser.me/api/portraits/women/44.jpg"
-    },
-    images: [
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop"
-    ],
-    rating: 4.8,
-    totalReviews: 124,
-    ratingBreakdown: [
-      { stars: 5, count: 102 },
-      { stars: 4, count: 15 },
-      { stars: 3, count: 5 },
-      { stars: 2, count: 0 },
-      { stars: 1, count: 2 }
-    ],
-    reviews: [
-      {
-        id: 1,
-        name: "Alex Johnson",
-        rating: 5,
-        date: "2 weeks ago",
-        text: "Absolutely breathtaking property. The photos don't do it justice. The agent, Jane, was incredibly helpful and professional throughout the entire process. Highly recommend!"
-      },
-      {
-        id: 2,
-        name: "Samantha Lee",
-        rating: 5,
-        date: "1 month ago",
-        text: "A truly beautiful home with an amazing view. The location is perfect. We had a great experience during our viewing. The price is a bit steep, but it's understandable for what you get."
-      }
-    ]
-  };
 
+  const property = useLoaderData()
+ 
+  
+  
   return (
     <>
       
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {
+         <Loader></Loader> &&  <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         
 
         {/* Property Header */}
         <div className="mb-6">
-          <h1 className="text-3xl font-bold  mb-2">{property.name}</h1>
+          <h1 className="text-3xl font-bold  mb-2">{property.propertyName}</h1>
           <p className="text-gray-400 flex items-center gap-1">
             <MapPin className="w-4 h-4" />
-            {property.address}
+            {property.location}
           </p>
         </div>
 
@@ -75,13 +31,13 @@ const PropertyDetails = () => {
           <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">{property.category}</span>
           <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">{property.type}</span>
           <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1">
-            <Bed className="w-4 h-4" /> {property.beds} Beds
+            <Bed className="w-4 h-4" /> 3 Beds
           </span>
           <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1">
-            <Bath className="w-4 h-4" /> {property.baths} Baths
+            <Bath className="w-4 h-4" /> 2 Baths
           </span>
           <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1">
-            <Square className="w-4 h-4" /> {property.sqft.toLocaleString()} sqft
+            <Square className="w-4 h-4" /> 2000 sqft
           </span>
         </div>
 
@@ -89,22 +45,22 @@ const PropertyDetails = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
           <div className="lg:col-span-2">
             <img 
-              src={property.images[0]} 
-              alt={property.name}
+              src={property.imageLinkInput} 
+              alt={property.propertyName}
               className="w-full h-96 object-cover rounded-xl shadow-lg"
             />
           </div>
-          <div className="space-y-4">
+          {/* <div className="space-y-4">
             {property.images.slice(1).map((img, idx) => (
               <img 
                 key={idx}
-                src={img} 
+                src={property.imageLinkInput} 
                 alt={`${property.name} - ${idx + 2}`}
                 className="w-full h-44 object-cover rounded-xl shadow-md"
               />
             ))}
            
-          </div>
+          </div> */}
         </div>
 
         {/* Property Info & Agent */}
@@ -125,20 +81,20 @@ const PropertyDetails = () => {
             <div className="mb-4">
               <p className="text-sm text-gray-600 mb-1">Price</p>
               <p className="text-4xl font-bold text-indigo-600">
-                {property.currency === 'BDT' ? '৳' : '$'}
-                {property.price.toLocaleString()}
+                $
+                {property.propertyPrice}
               </p>
             </div>
 
             <div className="flex items-center gap-3 mb-6">
               <img 
-                src={property.agent.photo} 
-                alt={property.agent.name}
+                src="https://randomuser.me/api/portraits/women/44.jpg" 
+                alt="Jane Doe"
                 className="w-12 h-12 rounded-full object-cover"
               />
               <div>
-                <p className="font-semibold text-gray-900">{property.agent.name}</p>
-                <p className="text-sm text-gray-600">{property.agent.title}</p>
+                <p className="font-semibold text-gray-900">"Jane Doe"</p>
+                <p className="text-sm text-gray-600">"Real Estate Agent"</p>
               </div>
             </div>
 
@@ -171,7 +127,7 @@ const PropertyDetails = () => {
           <div className="bg-gray-50 dark:bg-black/90 p-6 rounded-xl shadow-sm mb-8">
             <div className="flex items-start gap-8">
               <div className="text-center">
-                <p className="text-5xl font-bold ">{property.rating}</p>
+                <p className="text-5xl font-bold ">{property.starRating}</p>
                 <div className="flex justify-center gap-1 my-2">
                   {[...Array(5)].map((_, i) => (
                     <Star 
@@ -180,55 +136,57 @@ const PropertyDetails = () => {
                     />
                   ))}
                 </div>
-                <p className="text-sm text-gray-400">Based on {property.totalReviews} reviews</p>
+                <p className="text-sm text-gray-400">Based on 150 reviews</p>
               </div>
 
               <div className="flex-1 space-y-2">
-                {property.ratingBreakdown.map((item) => (
-                  <div key={item.stars} className="flex items-center gap-3">
-                    <span className="text-sm text-gray-400 w-12">{item.stars} star</span>
+                
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm text-gray-400 w-12">{5} star</span>
                     <div className="flex-1 bg-gray-200 dark:bg-gray-900 rounded-full h-3 overflow-hidden">
                       <div 
                         className="bg-yellow-400 h-full transition-all"
-                        style={{ width: `${(item.count / property.totalReviews) * 100}%` }}
+                        style={{ width: `${(20 / 150) * 100}%` }}
                       />
                     </div>
-                    <span className="text-sm text-gray-400 w-12 text-right">{item.count}</span>
+                    <span className="text-sm text-gray-400 w-12 text-right">{5}</span>
                   </div>
-                ))}
+                
               </div>
             </div>
           </div>
 
           {/* Individual Reviews */}
           <div className="space-y-6">
-            {property.reviews.map((review) => (
-              <div key={review.id} className="bg-gray-50 dark:bg-black/90 p-6 rounded-xl shadow-sm">
+            
+              <div className="bg-gray-50 dark:bg-black/90 p-6 rounded-xl shadow-sm">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gray-300 rounded-full flex-shrink-0"></div>
+                  <div className="w-12 h-12 bg-gray-300 rounded-full "></div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
                       <div>
-                        <p className="font-semibold ">{review.name}</p>
+                        <p className="font-semibold ">Alex Jendar</p>
                         <div className="flex gap-1">
                           {[...Array(5)].map((_, i) => (
                             <Star 
                               key={i} 
-                              className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
+                              className={`w-4 h-4 ${i < property.starRating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
                             />
                           ))}
                         </div>
                       </div>
-                      <p className="text-sm text-gray-400">{review.date}</p>
+                      <p className="text-sm text-gray-400">{property.reviewDate}</p>
                     </div>
-                    <p className="text-gray-400">{review.text}</p>
+                    <p className="text-gray-400">{property.shortReviewText}</p>
                   </div>
                 </div>
               </div>
-            ))}
+            
           </div>
         </div>
       </main>
+    }
+     
     </>
   );
 };

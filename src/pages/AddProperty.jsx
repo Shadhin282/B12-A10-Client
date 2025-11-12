@@ -1,8 +1,7 @@
-import { use, useState } from "react";
-
-import { useNavigate } from "react-router";
+import { use } from "react";
 import Sidebar from "../components/layout/Sidebar";
 import AuthContext from "../Context/AuthContext";
+import { toast } from "react-toastify";
 
 export default function AddProperty() {
   const {user} = use(AuthContext)
@@ -10,17 +9,26 @@ export default function AddProperty() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     const formData = {
-      name: e.target.name.value,
+      name: user.displayName,
+      propertyName : e.target.propertyName.value,
       category: e.target.category.value,
       description: e.target.description.value,
-      thumbnail: e.target.thumbnail.value,
-      created_at: new Date(),
-      downloads: 0,
-      created_by: user.email,
+      propertyPrice : e.target.price.value,
+      location : e.target.location.value,
+      imageLinkInput: e.target.imageUrl.value,
+      thumbnailImage: e.target.imageUrl.value,
+      postedDate: new Date(),
+      starRating: 5,
+      email: user.email,
+      shortDescription: 'property is well satisfied to buy and stay',
+      shortReviewText: 'property is awesome',
+      reviewDate: new Date(),
+      postedBy: user.displayName,
+       reviewerName: user.displayName
     };
-
+    console.log(formData)
     try {
-      const res = await fetch("http://localhost:3000/models", {
+      const res = await fetch("http://localhost:5000/properties", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -30,7 +38,8 @@ export default function AddProperty() {
 
       const data = await res.json();
       console.log(data);
-      toast.success("Model added successfully!");
+      toast.success("Property added successfully!");
+
     } catch (error) {
       console.log(error);
       toast.error(error.message);
@@ -87,7 +96,7 @@ export default function AddProperty() {
               </label>
               <input
                 type="text"
-                name="PropertyName"
+                name="propertyName"
                 
                
                 required

@@ -34,7 +34,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/property-details/:id',
-                element: <PrivateRoute><PropertyDetails></PropertyDetails></PrivateRoute>
+                element: <PrivateRoute><PropertyDetails></PropertyDetails></PrivateRoute>,
+                loader: ({params})=>fetch(`http://localhost:5000/properties/${params.id}`) 
             },
             {
                 path: '/add-property',
@@ -42,7 +43,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/my-properties',
-                element: <PrivateRoute><MyProperties></MyProperties></PrivateRoute>
+                element: <PrivateRoute><MyProperties></MyProperties></PrivateRoute>,
+                
             },
             {
                 path: '/my-ratings',
@@ -58,7 +60,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/update-property/:id',
-                element: <PrivateRoute><UpdateProperty></UpdateProperty></PrivateRoute>
+                element: <PrivateRoute><UpdateProperty></UpdateProperty></PrivateRoute>,
+                loader: ({params})=> fetch(`http://localhost:5000/properties/${params.id}`)
             }
         ]
         
