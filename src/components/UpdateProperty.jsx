@@ -10,7 +10,7 @@ export default function UpdateProperty() {
   const formData = useLoaderData();
   const now = new Date();
   const currentDate = now.toLocaleString();
-  console.log(formData._id);
+  console.log(formData);
   const handleUpdate = async (e) => {
     e.preventDefault();
     const formDataInput = {
@@ -79,6 +79,7 @@ export default function UpdateProperty() {
                   <input
                     type="text"
                     name="name"
+                    defaultValue={formData.propertyName}
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -90,6 +91,7 @@ export default function UpdateProperty() {
                   </label>
                   <textarea
                     name="description"
+                    defaultValue={formData.description}
                     rows={4}
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                   />
@@ -103,6 +105,7 @@ export default function UpdateProperty() {
                     </label>
                     <select
                       name="category"
+                      defaultValue={formData.category}
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                       <option>Apartment</option>
                       <option>House</option>
@@ -121,6 +124,7 @@ export default function UpdateProperty() {
                       <input
                         type="text"
                         name="price"
+                        defaultValue={formData.propertyPrice}
                         className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                     </div>
@@ -137,6 +141,7 @@ export default function UpdateProperty() {
                     <input
                       type="text"
                       name="location"
+                      defaultValue={formData.location}
                       className="w-full pl-11 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -150,6 +155,7 @@ export default function UpdateProperty() {
                   <input
                     type="url"
                     name="imageLink"
+                    defaultValue={formData.imageLinkInput}
                     className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono"
                   />
                 </div>
