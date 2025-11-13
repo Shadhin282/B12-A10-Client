@@ -8,15 +8,14 @@ import AuthContext from "../../Context/AuthContext";
 
 // Sample property data (replace with API later)
 
-
 // Property Card Component (Pure JSX)
 const MyPropertyCard = ({ property }) => {
   const isForRent = property.category === "FOR RENT";
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  console.log(property._id)
+  console.log(property._id);
 
-    const handleDelete = () => {
+  const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -27,9 +26,12 @@ const MyPropertyCard = ({ property }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/properties/${property._id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://real-state-homenest.vercel.app/properties/${property._id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -37,8 +39,8 @@ const MyPropertyCard = ({ property }) => {
               title: "Deleted!",
               text: "Your file has been deleted.",
               icon: "success",
-            })
-            navigate('/all-models')
+            });
+            navigate("/properties");
           })
           .catch((err) => {
             toast.success(err.message);
@@ -76,7 +78,6 @@ const MyPropertyCard = ({ property }) => {
         {/* Price */}
         <div className="mb-4">
           <span className="text-3xl font-bold text-indigo-600">
-            
             {property.price}
           </span>
           {isForRent && (
@@ -98,20 +99,22 @@ const MyPropertyCard = ({ property }) => {
 
         {/* Action Buttons */}
         <div className="flex gap-2">
-          <Link className="flex-1 bg-indigo-700 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-indigo-600 transition-colors shadow-sm hover:shadow-md text-sm">
+          <Link
+            to={`/property-details/${property._id}`}
+            className="flex-1 bg-indigo-700 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-indigo-600 transition-colors shadow-sm hover:shadow-md text-sm">
             View Details
           </Link>
-                  <Link
+          <Link
             to={`/update-property/${property._id}`}
-            
             className="flex-1 bg-indigo-500 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-indigo-400 transition-colors shadow-sm hover:shadow-md text-sm">
             Update
           </Link>
-          <button onClick={handleDelete} className="flex-1 bg-red-900 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-red-800 transition-colors shadow-sm hover:shadow-md text-sm">
+          <button
+            onClick={handleDelete}
+            className="flex-1 bg-red-900 text-white py-2.5 px-4 rounded-lg font-medium hover:bg-red-800 transition-colors shadow-sm hover:shadow-md text-sm">
             Delete
           </button>
         </div>
-        
       </div>
     </div>
   );
@@ -119,64 +122,61 @@ const MyPropertyCard = ({ property }) => {
 
 // Main Page
 export default function PropertyListingPage() {
-  const { user } = use(AuthContext)
+  const { user } = use(AuthContext);
 
-  const [properties, setProperties] = useState([])
+  const [properties, setProperties] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myProperties?email=${user.email}`)
-      .then(res => res.json())
-      .then(data => {
-        
-        setProperties(data)
-    })
-  },[user.email])
+    fetch(
+      `https://real-state-homenest.vercel.app/myProperties?email=${user.email}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setProperties(data);
+      });
+  }, [user.email]);
   return (
     <div className="min-h-screen  py-10 px-4">
-      {
-       properties.length ?
-      < div className="container mx-auto max-w-7xl">
-      <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold mb-3">
-          Your Property Listings
-        </h1>
-        <p className="text-lg text-gray-400">
-          Manage your real estate in Bangladesh
-        </p>
-      </div>
-
-      {/* Responsive Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2  gap-6">
-        {properties.map((property) => (
-          <MyPropertyCard key={property.id} property={property} />
-        ))}
-      </div>
-
-  
-    </div>
-          :
-          <div>
-            <div className="flex justify-between items-center mb-6">
-          <div>
-            <h1 className="text-2xl font-bold ">My Properties</h1>
-            <p className="text-gray-500 text-sm">
-              Manage your property listings
+      {properties.length ? (
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-10">
+            <h1 className="text-4xl font-bold mb-3">Your Property Listings</h1>
+            <p className="text-lg text-gray-400">
+              Manage your real estate in Bangladesh
             </p>
           </div>
-          <Link to='/add-property' className="bg-indigo-700 text-white px-5 py-2 rounded-md hover:bg-indigo-600">
-            Add New Property
-          </Link>
-        </div>
 
-        {/* Empty State */}
-        <div className="flex flex-col items-center justify-center h-64 border-gray-100 rounded-lg shadow-lg">
-          <p className="text-gray-500 text-xl mb-4">
-            You haven&apos;t added any properties yet.
-          </p>
-          
-        </div>
+          {/* Responsive Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2  gap-6">
+            {properties.map((property) => (
+              <MyPropertyCard key={property.id} property={property} />
+            ))}
           </div>
-    }
+        </div>
+      ) : (
+        <div>
+          <div className="flex justify-between items-center mb-6">
+            <div>
+              <h1 className="text-2xl font-bold ">My Properties</h1>
+              <p className="text-gray-500 text-sm">
+                Manage your property listings
+              </p>
+            </div>
+            <Link
+              to="/add-property"
+              className="bg-indigo-700 text-white px-5 py-2 rounded-md hover:bg-indigo-600">
+              Add New Property
+            </Link>
+          </div>
+
+          {/* Empty State */}
+          <div className="flex flex-col items-center justify-center h-64 border-gray-100 rounded-lg shadow-lg">
+            <p className="text-gray-500 text-xl mb-4">
+              You haven&apos;t added any properties yet.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

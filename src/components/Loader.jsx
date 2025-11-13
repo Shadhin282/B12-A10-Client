@@ -4,136 +4,130 @@ import styled from 'styled-components';
 const Loader = () => {
   return (
     <StyledWrapper>
-      <ul className="wave-menu">
-        <li />
-        <li />
-        <li />
-        <li />
-        <li />
-        <li />
-        <li />
-        <li />
-        <li />
-        <li />
-      </ul>
+      <div className="loader ">
+        <div className="loading-text">
+          Loading<span className="dot">.</span><span className="dot">.</span><span className="dot">.</span>
+        </div>
+        <div className="loading-bar-background">
+          <div className="loading-bar">
+            <div className="white-bars-container">
+              <div className="white-bar" />
+              <div className="white-bar" />
+              <div className="white-bar" />
+              <div className="white-bar" />
+              <div className="white-bar" />
+              <div className="white-bar" />
+              <div className="white-bar" />
+              <div className="white-bar" />
+              <div className="white-bar" />
+              <div className="white-bar" />
+            </div>
+          </div>
+        </div>
+      </div>
     </StyledWrapper>
   );
 }
 
 const StyledWrapper = styled.div`
-  .wave-menu {
-    border: 4px solid #545FE5;
-    border-radius: 50px;
+  .loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .loading-text {
+    color: white;
+    font-size: 14pt;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+
+  .dot {
+    margin-left: 3px;
+    animation: blink 1.5s infinite;
+  }
+  .dot:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+
+  .dot:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+
+  .loading-bar-background {
+    --height: 30px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 5px;
     width: 200px;
-    height: 45px;
+    height: var(--height);
+    background-color: #212121 /*change this*/;
+    box-shadow: #0c0c0c -2px 2px 4px 0px inset;
+    border-radius: calc(var(--height) / 2);
+  }
+
+  .loading-bar {
+    position: relative;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    --height: 20px;
+    width: 0%;
+    height: var(--height);
+    overflow: hidden;
+    background: rgb(222, 74, 15);
+    background: linear-gradient(
+      0deg,
+      rgba(222, 74, 15, 1) 0%,
+      rgba(249, 199, 79, 1) 100%
+    );
+    border-radius: calc(var(--height) / 2);
+    animation: loading 4s ease-out infinite;
+  }
+
+  .white-bars-container {
+    position: absolute;
+    display: flex;
     align-items: center;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    transition: ease 0.2s;
-    position: relative;
-    background: #fff;
+    gap: 18px;
   }
 
-  .wave-menu li {
-    list-style: none;
-    height: 30px;
-    width: 4px;
-    border-radius: 10px;
-    background: #545FE5;
-    margin: 0 6px;
-    padding: 0;
-    animation-name: wave1;
-    animation-duration: 0.3s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    transition: ease 0.2s;
+  .white-bar {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 70%
+    );
+    width: 10px;
+    height: 45px;
+    opacity: 0.3;
+    rotate: 45deg;
   }
 
-  .wave-menu:hover > li {
-    background: #fff;
-  }
-
-  .wave-menu:hover {
-    background: #545FE5;
-  }
-
-  .wave-menu li:nth-child(2) {
-    animation-name: wave2;
-    animation-delay: 0.2s;
-  }
-
-  .wave-menu li:nth-child(3) {
-    animation-name: wave3;
-    animation-delay: 0.23s;
-    animation-duration: 0.4s;
-  }
-
-  .wave-menu li:nth-child(4) {
-    animation-name: wave4;
-    animation-delay: 0.1s;
-    animation-duration: 0.3s;
-  }
-
-  .wave-menu li:nth-child(5) {
-    animation-delay: 0.5s;
-  }
-
-  .wave-menu li:nth-child(6) {
-    animation-name: wave2;
-    animation-duration: 0.5s;
-  }
-
-  .wave-menu li:nth-child(8) {
-    animation-name: wave4;
-    animation-delay: 0.4s;
-    animation-duration: 0.25s;
-  }
-
-  .wave-menu li:nth-child(9) {
-    animation-name: wave3;
-    animation-delay: 0.15s;
-  }
-
-  @keyframes wave1 {
-    from {
-      transform: scaleY(1);
+  @keyframes loading {
+    0% {
+      width: 0;
     }
-
-    to {
-      transform: scaleY(0.5);
+    80% {
+      width: 100%;
+    }
+    100% {
+      width: 100%;
     }
   }
 
-  @keyframes wave2 {
-    from {
-      transform: scaleY(0.3);
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 0;
     }
-
-    to {
-      transform: scaleY(0.6);
-    }
-  }
-
-  @keyframes wave3 {
-    from {
-      transform: scaleY(0.6);
-    }
-
-    to {
-      transform: scaleY(0.8);
-    }
-  }
-
-  @keyframes wave4 {
-    from {
-      transform: scaleY(0.2);
-    }
-
-    to {
-      transform: scaleY(0.5);
+    50% {
+      opacity: 1;
     }
   }`;
 

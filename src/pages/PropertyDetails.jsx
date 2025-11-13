@@ -7,7 +7,7 @@ const PropertyDetails = () => {
 
   const property = useLoaderData()
  
-  
+  console.log(property)
   
   return (
     <>
@@ -83,7 +83,7 @@ const PropertyDetails = () => {
           {/* Price & Agent Card */}
           <div className="bg-gray-50 dark:bg-black/90 p-6 rounded-xl">
             <div className="mb-4">
-              <p className="text-sm text-gray-600 mb-1">Price</p>
+              <p className="text-sm text-gray-400 mb-1">Price</p>
               <p className="text-4xl font-bold text-indigo-600">
                 $
                 {property.propertyPrice}
@@ -97,8 +97,8 @@ const PropertyDetails = () => {
                 className="w-12 h-12 rounded-full object-cover"
               />
               <div>
-                <p className="font-semibold text-gray-900">"Jane Doe"</p>
-                <p className="text-sm text-gray-600">"Real Estate Agent"</p>
+                <p className="font-semibold ">"Jane Doe"</p>
+                <p className="text-sm text-gray-400">"Real Estate Agent"</p>
               </div>
             </div>
 
@@ -136,7 +136,7 @@ const PropertyDetails = () => {
                   {[...Array(5)].map((_, i) => (
                     <Star 
                       key={i} 
-                      className={`w-5 h-5 ${i < Math.floor(property.rating) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
+                      className={`w-5 h-5 ${i < Math.floor(property.starRating) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
                     />
                   ))}
                 </div>
@@ -150,10 +150,50 @@ const PropertyDetails = () => {
                     <div className="flex-1 bg-gray-200 dark:bg-gray-900 rounded-full h-3 overflow-hidden">
                       <div 
                         className="bg-yellow-400 h-full transition-all"
-                        style={{ width: `${(20 / 150) * 100}%` }}
+                        style={{ width: `${(150 / 150) * 100}%` }}
                       />
                     </div>
                     <span className="text-sm text-gray-400 w-12 text-right">{5}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm text-gray-400 w-12">{4} star</span>
+                    <div className="flex-1 bg-gray-200 dark:bg-gray-900 rounded-full h-3 overflow-hidden">
+                      <div 
+                        className="bg-yellow-400 h-full transition-all"
+                        style={{ width: `${(120 / 150) * 100}%` }}
+                      />
+                    </div>
+                    <span className="text-sm text-gray-400 w-12 text-right">{4}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm text-gray-400 w-12">{3} star</span>
+                    <div className="flex-1 bg-gray-200 dark:bg-gray-900 rounded-full h-3 overflow-hidden">
+                      <div 
+                        className="bg-yellow-400 h-full transition-all"
+                        style={{ width: `${(90 / 150) * 100}%` }}
+                      />
+                    </div>
+                    <span className="text-sm text-gray-400 w-12 text-right">{3}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm text-gray-400 w-12">{2} star</span>
+                    <div className="flex-1 bg-gray-200 dark:bg-gray-900 rounded-full h-3 overflow-hidden">
+                      <div 
+                        className="bg-yellow-400 h-full transition-all"
+                        style={{ width: `${(60 / 150) * 100}%` }}
+                      />
+                    </div>
+                    <span className="text-sm text-gray-400 w-12 text-right">{2}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm text-gray-400 w-12">{1} star</span>
+                    <div className="flex-1 bg-gray-200 dark:bg-gray-900 rounded-full h-3 overflow-hidden">
+                      <div 
+                        className="bg-yellow-400 h-full transition-all"
+                        style={{ width: `${(30 / 150) * 100}%` }}
+                      />
+                    </div>
+                    <span className="text-sm text-gray-400 w-12 text-right">{1}</span>
                   </div>
                 
               </div>

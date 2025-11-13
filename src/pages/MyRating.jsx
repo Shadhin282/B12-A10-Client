@@ -125,7 +125,7 @@ export default function MyRating() {
             <h1 className="text-4xl font-bold  mb-3">
               User Ratings & Feedback
             </h1>
-            <p className="text-gray-600 text-lg">
+            <p className="text-gray-400 text-lg">
               Real reviews from verified guests
             </p>
           </header>

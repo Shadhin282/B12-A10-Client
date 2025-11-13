@@ -5,7 +5,7 @@ import { MapPin, DollarSign } from 'lucide-react';
 
 
 export const PropertiesCard = ({property}) => {
-
+ console.log(property._id)
   return <div className="bg-gray-50 dark:bg-black/90 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
       <div className="relative h-48">
         <img src={property.imageLinkInput} alt={property.name} className="w-full h-full object-cover" />

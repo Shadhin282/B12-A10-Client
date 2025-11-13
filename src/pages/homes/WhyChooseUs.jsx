@@ -39,7 +39,7 @@ export const WhyChooseUs = () => {
               <p className="text-gray-400">{feature.description}</p>
             </div>)}
         </div>
-        <div className="mt-16 shadow-lg bg-gray-50 dark:bg-black/90 p-8 rounded-lg border border-gray-50">
+        <div className="mt-16 shadow-lg bg-gray-50 dark:bg-black/90 p-8 rounded-lg ">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-6 md:mb-0 md:mr-8">
               <h3 className="text-2xl font-bold mb-2">

@@ -10,7 +10,7 @@ const Header = () => {
   // console.log(user.displayName)
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  
+  console.log(user)
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -35,39 +35,39 @@ const Header = () => {
       <div className="container font-semibold mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/home" className="flex items-center space-x-2">
           <Home className="w-8 h-8 text-primary" />
-          <span className="text-xl font-bold text-primary">HomeNest</span>
+          <span className="text-3xl font-bold text-primary">HomeNest</span>
         
         </Link>
         
-        <nav className="hidden  text-primary md:flex items-center space-x-5">
+        <nav className="hidden border border-gray-200 px-4 py-2 rounded-2xl bg-linear-to-r from-indigo-200 via-indigo-300 to-indigo-400  text-black/60 md:flex items-center space-x-5">
           <div className=""><DarkLight></DarkLight></div>
           <Link
             to="/home"
-            className=" hover:text-primary transition-colors">
-            Home
+            className=" hover:text-primary border border-gray-200 px-4 py-2 rounded-2xl bg-linear-to-r from-indigo-200 via-indigo-300 to-indigo-400 transition-colors">
+            HOME
           </Link>
           <Link
             to="/properties"
-            className=" hover:text-primary transition-colors">
-            All Properties
+            className=" hover:text-primary border border-gray-200 px-4 py-2 rounded-2xl bg-linear-to-r from-indigo-200 via-indigo-300 to-indigo-400 transition-colors">
+            PROPERTIES
           </Link>
 
           {
             user && (<div className="hidden md:flex items-center space-x-8">
               <Link
             to="/add-property"
-            className=" hover:text-primary transition-colors">
-            Add Properties
+            className=" hover:text-primary border border-gray-200 px-4 py-2 rounded-2xl bg-linear-to-r from-indigo-200 via-indigo-300 to-indigo-400 transition-colors">
+            ADD PROPERTIES
           </Link>
           <Link
             to="/my-properties"
-            className=" hover:text-primary transition-colors">
-            My Properties
+            className=" hover:text-primary border border-gray-200 px-4 py-2 rounded-2xl bg-linear-to-r from-indigo-200 via-indigo-300 to-indigo-400 transition-colors">
+            MY PROPERTIES
           </Link>
           <Link
             to="/my-ratings"
-            className=" hover:text-primary transition-colors">
-            My Ratings
+            className=" hover:text-primary border border-gray-200 px-4 py-2 rounded-2xl bg-linear-to-r from-indigo-200 via-indigo-300 to-indigo-400 transition-colors">
+            RATINGS
           </Link>
             </div>)
           }
@@ -79,7 +79,7 @@ const Header = () => {
           
         <div className="hidden md:flex items-center space-x-4">
           {
-            !user && <div className="hidden md:flex items-center space-x-4">
+            !user && <div className="hidden text-xl md:flex items-center space-x-4">
             <Link to='/login' className="px-4 py-2 text-primary border border-primary rounded hover:bg-primary hover:text-white transition-colors">
             Login
           </Link>
@@ -98,7 +98,7 @@ const Header = () => {
               <img
                 src={user.photoURL}
                 alt="User profile"
-                className="w-10 h-10 rounded-full object-cover border-2 border-primary"
+                className="w-15 h-15 rounded-full object-cover border-2 border-primary"
               />
               <ChevronDown className="w-4 h-4 text-gray-600" />
             </button>
