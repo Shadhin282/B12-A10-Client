@@ -32,6 +32,7 @@ The project integrates modern UI, authentication, and API architecture — offer
 - 🔄 **CORS** for secure API requests
 
 ---
+- sitelink: https://gorgeous-faloodeh-170cc9.netlify.app/
 
 
 
